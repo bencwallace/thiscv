@@ -1,0 +1,209 @@
+<!-- Thanks: https://bl.ocks.org/hugolpz/8075193 -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!-- stylesheet -->
+  <link rel="stylesheet" href="cv.css">
+
+  <!-- MathJax -->
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+	  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+	});
+	</script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+  <!-- jQuery -->
+  <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+  <!-- Handlebars -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.min.js"></script>
+</head>
+
+ 
+<body class="A4">
+<div id="content"></div>
+
+<!-- template -->
+
+<script id="template-script" type="text/template">
+
+{{#personal}}
+<header class="row">
+	<div class="column left">
+		<div id="name">{{full_name name "{F} {L}"}}</div>
+		<div id="email">{{email}}</div>
+		{{#web}}
+		<div id="web">
+			<div>{{work}}</div>
+			<div>{{github}}</div>
+			<div>{{linkedin}}</div>
+		</div>
+		{{/web}}
+	</div>
+	<div class="column right">
+		<div id="address">
+			{{#each address}}
+				<div class="address-line">{{this}}</div>
+			{{/each}}
+			{{#phone}}
+			<div id="phone">
+				<span id="country-code">+{{country}}</span>
+				<span id="area-code">{{area}}</span>
+				<span id="phone-number">{{number}}</span>
+			</div>
+			{{/phone}}
+		</div>
+	</div>
+</header>
+{{/personal}}
+
+<hr />
+
+<section class="row" id="education">
+	<div class="column title">Education</div>
+
+	<div class="column content">
+		{{#each education}}
+		<div class="item">
+			<span class="degree">{{degree}}</span> /
+			<span class="institution">{{institution}}</span>
+			(<span class="subject">{{subject}}</span>)
+			{{range start end}}
+		</div>
+		{{/each}}
+	</div>
+</section>
+
+<section class="row" id="employment">
+	<div class="column title">Experience</div>
+
+	<div class="column content">
+		{{#each employment}}
+		<div class="item">
+			<span class="position">Postdoctoral fellow</span> /
+			<span class="organization">IST Austria</span>
+			{{range start end}}
+		</div>
+		{{/each}}
+	</div>
+</section>
+
+<section class="row" id="publications">
+	<div class="column title">Publications</div>
+
+	<div class="column content">
+		{{#each publications}}
+		<div class="item">
+			<span class="title pub">{{title}}</span>
+			(coauthors:
+			<span class="coauthors">
+			{{#each coauthors}}
+				<span class="coauthor">
+				{{#if @last}}
+					{{full_name this}})
+				{{else}}
+					{{full_name this}},
+				{{/if}}
+				</span>
+			</span>
+			{{/each}}
+			</span>
+			<div class="bib">
+				<span class="journal">{{journal}}</span>
+				<span class="volume">{{volume}}</span>:<span class="pages">{{start}}&ndash;{{end}}</span>
+			</div>
+			<div class="date pub">{{print_date date "{Y}"}}</div>
+			<div></div>
+		</div>
+		{{/each}}
+	</div>
+</section>
+
+</script>
+
+<!-- load JSON data and generate HTML -->
+
+<script>
+function print_date(date, format) {
+	if (!format || typeof format != 'string') {
+		format = "{Y}.{M}"
+	}
+
+	var sub = {
+		"{Y}": date.year,
+		"{y}": date.year.toString().substr(2, 2),
+		"{M}": '0'.concat(date.month.toString()).substr(-2, 2),
+		"{m}": date.month
+	}
+
+	formatted_date = format
+	for (key in sub) {
+		formatted_date = formatted_date.replace(key, sub[key])
+	}
+
+	return formatted_date
+}
+
+Handlebars.registerHelper('print_date', print_date)
+
+// to do: allow other date formats
+Handlebars.registerHelper('range', function(start, end) {
+out = `
+		<div class="range">
+			<span class="date start">${print_date(start)}</span> &ndash;`
+
+	if (end) {
+		out += `
+			<span class="date end">${print_date(end)}</span>`
+	}
+
+	out += "</div>"
+
+	return new Handlebars.SafeString(out)
+})
+
+// example: set initial formatted_name to "{T} {F} {m}. {L}"
+Handlebars.registerHelper('full_name', function(name, format) {
+	if (!format || typeof format != 'string') {
+		format = "{f}. {L}"
+	}
+	formatted_name = format
+
+	var sub = {
+		"{T}": name.title,
+		"{F}": name.first,
+		"{M}": name.middle,
+		"{L}": name.last
+	}
+
+	for (var key in sub) {
+		if (!sub[key]) {
+			sub[key] = ""
+		}
+		formatted_name = formatted_name.replace(key, sub[key])
+		formatted_name = formatted_name.replace(key.toLowerCase(), sub[key].charAt(0))
+	}
+
+	return formatted_name
+})
+
+Handlebars.registerHelper('date', function(date) {
+	// do something
+})
+
+var slingshot = function (url, tplId, result) {
+ $.getJSON(url, function(data) {
+          var template = $(tplId).html()
+          var stone = Handlebars.compile(template)(data)
+          $(result).html(stone)
+        })
+  }
+
+slingshot('cv.json', '#template-script', '#content');
+</script>
+</body>
+
+</html>

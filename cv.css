@@ -1,0 +1,120 @@
+/** {
+	box-sizing: border-box;
+}*/
+
+* {
+	font-family: arial;
+}
+
+body.A4 {
+	width: 210mm;
+}
+
+.row::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.column {
+	float: left;
+}
+
+/* header */
+
+header {
+	vertical-align: text-bottom;
+}
+
+header .column {
+	width: 50%;
+}
+
+header .column.left {
+	text-align: left;
+}
+
+header .column.right {
+	text-align: right;
+}
+
+#name {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	background: #333;
+	/*background-image: linear-gradient(to right, #ccc, #333, #ccc);*/
+}
+
+/* sections */
+
+section .column.title {
+	width: 40%;
+	font-size: large;
+	text-transform: lowercase;
+	font-size: large;
+	font-weight: bold;
+}
+
+section .column.content {
+	width: 60%;
+}
+
+div.item::after {
+	content: "\A";
+	white-space: pre;
+}
+
+section.row::after {
+	content: "\A";
+	white-space: pre;
+}
+
+/* dates */
+
+.range {
+	font-size: small;
+}
+
+.date {
+	font-size: small;
+}
+
+/* education */
+
+.degree {
+	font-weight: bold;
+}
+
+.institution {
+	font-weight: normal;
+}
+
+.subject {
+	text-transform: capitalize;
+}
+
+/* employment */
+
+.position {
+	font-weight: bold;
+}
+
+/* publications */
+
+.title.pub {
+	font-weight: bold;
+}
+
+.bib {
+	display: normal;
+}
+
+
+.journal {
+	font-style: italic;
+}
