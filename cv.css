@@ -28,9 +28,13 @@ body.A4 {
 
 header {
 	vertical-align: text-bottom;
+	/*border: solid black 1px;*/
 }
 
 header .column {
+	padding: 0;
+	margin: 0;
+	padding: 0;
 	width: 50%;
 }
 
@@ -39,11 +43,12 @@ header .column.left {
 }
 
 header .column.right {
+	vertical-align: bottom;
 	text-align: right;
 }
 
-#name {
-	font-size: x-large;
+#name {;
+	font-size: 30px;
 	font-weight: bold;
 }
 

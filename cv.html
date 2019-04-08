@@ -1,7 +1,7 @@
-<!-- Thanks: https://bl.ocks.org/hugolpz/8075193 -->
-
 <!DOCTYPE html>
 <html>
+
+<!-- HEAD -->
 
 <head>
 	<!-- stylesheet -->
@@ -22,7 +22,8 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.min.js"></script>
 </head>
 
- 
+<!-- BODY -->
+
 <body class="A4">
 
 <header class="row" id="header"></header>
@@ -40,7 +41,9 @@
 <section class="row" id="awards"></section>
 <section class="row" id="languages"></section>
 
-<!-- header template -->
+<!-- TEMPLATES -->
+
+<!-- header -->
 
 <script id="header-template" type="text/template">
 
@@ -72,7 +75,7 @@
 
 </script>
 
-<!-- education template -->
+<!-- education -->
 
 <script id="education-template" type="text/template">
 
@@ -91,7 +94,7 @@
 
 </script>
 
-<!-- employment template -->
+<!-- employment -->
 
 <script id="employment-template" type="text/template">
 
@@ -109,7 +112,7 @@
 
 </script>
 
-<!-- publications template -->
+<!-- publications -->
 
 <script id="publications-template" type="text/template">
 
@@ -143,7 +146,7 @@
 
 </script>
 
-<!-- talks template -->
+<!-- talks -->
 
 <script id="talks-template" type="text/template">
 
@@ -161,7 +164,7 @@
 
 </script>
 
-<!-- teaching template -->
+<!-- teaching -->
 
 <script id="teaching-template" type="text/template">
 
@@ -179,7 +182,7 @@
 
 </script>
 
-<!-- awards template -->
+<!-- awards -->
 
 <script id="awards-template" type="text/template">
 
@@ -197,7 +200,7 @@
 
 </script>
 
-<!-- professional development template -->
+<!-- professional development -->
 
 <script id="professional-template" type="text/template">
 
@@ -218,7 +221,7 @@
 
 </script>
 
-<!-- technologies template -->
+<!-- technologies -->
 
 <script id="tech-template" type="text/template">
 
@@ -243,7 +246,7 @@
 
 </script>
 
-<!-- repositories template -->
+<!-- repositories -->
 
 <script id="repos-template" type="text/template">
 
@@ -278,32 +281,33 @@
 
 </script>
 
-<!-- load helpers -->
+<!-- HELPERS -->
 
 <script src="helpers.js"></script>
 
-<!-- load JSON data and generate HTML -->
+<!-- MAIN SCRIPT -->
 
 <script>
-var slingshot = function (url, tplId, result) {
- $.getJSON(url, function(data) {
-          var template = $(tplId).html()
-          var stone = Handlebars.compile(template)(data)
-          $(result).html(stone)
+function fill_html (id, out) {
+ $.getJSON('cv.json', function(data) {
+          var template = $(id).html()
+          var compiled = Handlebars.compile(template)
+          var output = compiled(data)
+          $(out).html(output)
         })
   }
 
-slingshot('cv.json', '#header-template', '#header');
-slingshot('cv.json', '#education-template', '#education');
-slingshot('cv.json', '#employment-template', '#employment');
-slingshot('cv.json', '#professional-template', '#professional')
-slingshot('cv.json', '#publications-template', '#publications');
-slingshot('cv.json', '#talks-template', '#talks');
-slingshot('cv.json', '#teaching-template', '#teaching');
-slingshot('cv.json', '#awards-template', '#awards')
-slingshot('cv.json', '#tech-template', '#tech');
-slingshot('cv.json', '#repos-template', '#repos');
-slingshot('cv.json', '#languages-template', '#languages')
+fill_html('#header-template', '#header');
+fill_html('#education-template', '#education');
+fill_html('#employment-template', '#employment');
+fill_html('#professional-template', '#professional')
+fill_html('#publications-template', '#publications');
+fill_html('#talks-template', '#talks');
+fill_html('#teaching-template', '#teaching');
+fill_html('#awards-template', '#awards')
+fill_html('#tech-template', '#tech');
+fill_html('#repos-template', '#repos');
+fill_html('#languages-template', '#languages')
 </script>
 </body>
 
