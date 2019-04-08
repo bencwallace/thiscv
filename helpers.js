@@ -3,6 +3,10 @@ function print_date(date, format) {
 		format = "{Y}.{M}"
 	}
 
+	if (!date.month) {
+		date.month = ""
+	}
+
 	var sub = {
 		"{Y}": date.year,
 		"{y}": date.year.toString().substr(2, 2),
@@ -19,6 +23,22 @@ function print_date(date, format) {
 }
 
 Handlebars.registerHelper('print_date', print_date)
+
+Handlebars.registerHelper('page_range', function(pages, format) {
+	if (format == 'number') {
+		// print number of pages
+		out = (pages.end - pages.start) + ' pages'
+	} else {
+		// print page range
+		out = pages.start + '&ndash;' + pages.end
+	}
+
+	return new Handlebars.SafeString(out)
+})
+
+Handlebars.registerHelper('capitalize', function(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1)
+})
 
 // to do: allow other date formats
 Handlebars.registerHelper('range', function(start, end) {

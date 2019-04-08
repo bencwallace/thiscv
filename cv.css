@@ -1,7 +1,3 @@
-/** {
-	box-sizing: border-box;
-}*/
-
 * {
 	font-family: arial;
 }
@@ -10,14 +6,22 @@ body.A4 {
 	width: 210mm;
 }
 
-.row::after {
-	content: "";
-	display: table;
-	clear: both;
+@media print {
+	div.item {
+		page-break-inside: avoid;
+	}
 }
 
 .column {
 	float: left;
+}
+
+/* rows */
+
+.row::after {
+	content: "";
+	display: table;
+	clear: both;
 }
 
 /* header */
@@ -64,14 +68,19 @@ section .column.content {
 	width: 60%;
 }
 
-div.item::after {
-	content: "\A";
-	white-space: pre;
+.subsection {
+	font-style: italic;
+	margin: 0 0 5px 0;
 }
 
-section.row::after {
-	content: "\A";
-	white-space: pre;
+/* items */
+
+div.item .name {
+	font-weight: bold;
+}
+
+div.item {
+	margin: 0 0 10px 0;
 }
 
 /* dates */
@@ -84,37 +93,26 @@ section.row::after {
 	font-size: small;
 }
 
-/* education */
-
-.degree {
-	font-weight: bold;
-}
-
-.institution {
-	font-weight: normal;
-}
-
-.subject {
-	text-transform: capitalize;
-}
-
-/* employment */
-
-.position {
-	font-weight: bold;
-}
-
 /* publications */
 
-.title.pub {
-	font-weight: bold;
-}
-
 .bib {
-	display: normal;
+	display: none;
 }
-
 
 .journal {
 	font-style: italic;
+}
+
+.volume {
+	font-weight: bold;
+}
+
+/* other */
+
+.url {
+	font-family: monospace;
+}
+
+.description {
+	font-size: 0.9em;
 }

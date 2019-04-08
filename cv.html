@@ -26,10 +26,19 @@
 <body class="A4">
 
 <header class="row" id="header"></header>
+
 <hr />
+
 <section class="row" id="education"></section>
 <section class="row" id="employment"></section>
+<section class="row" id="tech"></section>
+<section class="row" id="repos"></section>
+<section class="row" id="professional"></section>
 <section class="row" id="publications"></section>
+<section class="row" id="talks"></section>
+<section class="row" id="teaching"></section>
+<section class="row" id="awards"></section>
+<section class="row" id="languages"></section>
 
 <!-- header template -->
 
@@ -38,14 +47,12 @@
 {{#personal}}
 <div class="column left">
 	<div id="name">{{full_name name "{F} {L}"}}</div>
-	<div id="email">{{email}}</div>
-	{{#web}}
+	<div id="email" class="url">{{email}}</div>
 	<div id="web">
-		<div>{{work}}</div>
-		<div>{{github}}</div>
-		<div>{{linkedin}}</div>
+	{{#each web}}
+		<div class="url">{{url}}</div>
+	{{/each}}
 	</div>
-	{{/web}}
 </div>
 <div class="column right">
 	<div id="address">
@@ -74,9 +81,9 @@
 <div class="column content">
 	{{#each education}}
 	<div class="item">
-		<span class="degree">{{degree}}</span> /
-		<span class="institution">{{institution}}</span>
-		(<span class="subject">{{subject}}</span>)
+		<span class="name">{{degree}}</span> /
+		<span>{{institution}}</span>
+		(<span>{{capitalize subject}}</span>)
 		{{range start end}}
 	</div>
 	{{/each}}
@@ -93,7 +100,7 @@
 <div class="column content">
 	{{#each employment}}
 	<div class="item">
-		<span class="position">Postdoctoral fellow</span> /
+		<span class="name">Postdoctoral fellow</span> /
 		<span class="organization">IST Austria</span>
 		{{range start end}}
 	</div>
@@ -111,11 +118,11 @@
 <div class="column content">
 	{{#each publications}}
 	<div class="item">
-		<span class="title pub">{{title}}</span>
+		<span class="name">{{title}}</span>
 		(coauthors:
-		<span class="coauthors">
+		<span>
 		{{#each coauthors}}
-			<span class="coauthor">
+			<span>
 			{{#if @last}}
 				{{full_name this}})
 			{{else}}
@@ -127,10 +134,144 @@
 		</span>
 		<div class="bib">
 			<span class="journal">{{journal}}</span>
-			<span class="volume">{{volume}}</span>:<span class="pages">{{start}}&ndash;{{end}}</span>
+			<span class="volume">{{volume}}</span>:<span>{{page_range pages}}</span>
 		</div>
-		<div class="date pub">{{print_date date "{Y}"}}</div>
-		<div></div>
+		<div class="date">{{print_date date}}</div>
+	</div>
+	{{/each}}
+</div>
+
+</script>
+
+<!-- talks template -->
+
+<script id="talks-template" type="text/template">
+
+<div class="column title">Talks</div>
+
+<div class="column content">
+	{{#each talks}}
+	<div class="item">
+		<span class="name">{{location.name}}</span> /
+		<spa>{{event.name}}</span>
+		<div class="date">{{print_date date}}</div>
+	</div>
+	{{/each}}
+</div>
+
+</script>
+
+<!-- teaching template -->
+
+<script id="teaching-template" type="text/template">
+
+<div class="column title">Teaching</div>
+
+<div class="column content">
+	{{#each teaching}}
+		<div class="item">
+			<span class="name">{{course}}</span> /
+			<span>{{role}}</span>
+			<div class="date">{{print_date date "{Y}"}}</div>
+		</div>
+	{{/each}}
+</div>
+
+</script>
+
+<!-- awards template -->
+
+<script id="awards-template" type="text/template">
+
+<div class="column title">Honours</div>
+
+<div class="column content">
+	{{#each awards}}
+	<div class="item">
+		<span class="name">{{name}}</span> /
+		<span>{{sponsor}}</span>
+		<div class="date">{{print_date date "{Y}"}}</div>
+	</div>
+	{{/each}}
+</div>
+
+</script>
+
+<!-- professional development template -->
+
+<script id="professional-template" type="text/template">
+
+<div class="column title">Professional Development</div>
+
+{{#professional}}
+<div class="column content">
+	<div class="subsection">Coursera</div>
+	{{#each coursera}}
+	<div class="item">
+		<span class="name">{{course}}</span> /
+		<span>{{organization}}</span>
+		<div class="date">{{print_date date "{Y}"}}</div>
+	</div>
+	{{/each}}
+</div>
+{{/professional}}
+
+</script>
+
+<!-- technologies template -->
+
+<script id="tech-template" type="text/template">
+
+<div class="column title">Technologies</div>
+
+<div class="column content">
+	{{#each technologies}}
+	<div class="item">
+		<span class="name">{{capitalize @key}}</span>
+		<div>
+		{{#each this}}
+			{{#if @last}}
+				{{this}}
+			{{else}}
+				{{{this}}},
+			{{/if}}
+		{{/each}}
+		</div>
+	</div>
+	{{/each}}
+</div>
+
+</script>
+
+<!-- repositories template -->
+
+<script id="repos-template" type="text/template">
+
+<div class="column title">Public repositories</div>
+
+<div class="column content">
+	{{#each repos}}
+	<div class="item">
+		<span class="name">{{name}}</span>
+		<div class="description">{{description}}</div>
+		<div class="url">{{url}}</div>
+	</div>
+	{{/each}}
+</div>
+
+</script>
+
+<!-- languages -->
+
+<script id="languages-template" type="text/template">
+
+<div class="column title">Languages</div>
+
+<div class="column content">
+	{{#each languages}}
+	<div class="item">
+		<span class="name">{{capitalize name}}</span> /
+		<span>{{capitalize proficiency}}</span>
 	</div>
 	{{/each}}
 </div>
@@ -155,7 +296,14 @@ var slingshot = function (url, tplId, result) {
 slingshot('cv.json', '#header-template', '#header');
 slingshot('cv.json', '#education-template', '#education');
 slingshot('cv.json', '#employment-template', '#employment');
+slingshot('cv.json', '#professional-template', '#professional')
 slingshot('cv.json', '#publications-template', '#publications');
+slingshot('cv.json', '#talks-template', '#talks');
+slingshot('cv.json', '#teaching-template', '#teaching');
+slingshot('cv.json', '#awards-template', '#awards')
+slingshot('cv.json', '#tech-template', '#tech');
+slingshot('cv.json', '#repos-template', '#repos');
+slingshot('cv.json', '#languages-template', '#languages')
 </script>
 </body>
 
