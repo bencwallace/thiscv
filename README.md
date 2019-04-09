@@ -29,8 +29,8 @@ A [sample CV](example.pdf) was produced from the `example.json` data file.
 
 ### Making a new CV
 
-Simply modify the files `example.json`, `template.html`, and `template.css` as you
-see fit!
+It's enough to just fill `example.json` with the appropriate data. For more extensive
+changes, you can modify `template.html` or the stylesheet as you see fit!
 
 ### Compiling a CV
 
