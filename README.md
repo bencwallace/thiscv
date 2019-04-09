@@ -21,11 +21,15 @@ templating system was somewhat arbitrary. However, the decision to use
 Javascript rather than some other language was based on the ease of
 interoperability between Javascript and JSON.
 
+## Example
+
+A [sample CV](example.pdf) was produced from the `example.json` data file.
+
 ## Usage
 
 ### Making a new CV
 
-Simply modify the files `template.json`, `template.html`, and `cv.css` as you
+Simply modify the files `example.json`, `template.html`, and `template.css` as you
 see fit!
 
 ### Compiling a CV
