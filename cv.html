@@ -40,6 +40,7 @@
 <section class="row" id="teaching"></section>
 <section class="row" id="awards"></section>
 <section class="row" id="languages"></section>
+<section class="row" id="citizenship"></section>
 
 <!-- TEMPLATES -->
 
@@ -176,7 +177,7 @@
 		<div class="item">
 			<span class="name">{{course}}</span> /
 			<span>{{role}}</span>
-			<div class="date">{{print_date date "{Y}"}}</div>
+			<div class="date">{{range start end}}</div>
 		</div>
 	{{/each}}
 </div>
@@ -209,7 +210,7 @@
 
 {{#professional}}
 <div class="column content">
-	<div class="subsection">Coursera</div>
+	<div class="subsection">Coursera certifications</div>
 	{{#each coursera}}
 	<div class="item">
 		<span class="name">{{course}}</span> /
@@ -269,7 +270,7 @@
 
 <script id="languages-template" type="text/template">
 
-<div class="column title">Languages</div>
+<div class="column title">Spoken Languages</div>
 
 <div class="column content">
 	{{#each languages}}
@@ -278,6 +279,28 @@
 		<span>{{capitalize proficiency}}</span>
 	</div>
 	{{/each}}
+</div>
+
+</script>
+
+<!-- citizenship -->
+
+<script id="citizenship-template" type="text/template">
+
+<div class="column title">Citizenship</div>
+
+<div class="column content">
+	<div class="item">
+	{{#each citizenship}}
+		<span class="name">
+		{{#if @last}}
+			{{this}}
+		{{else}}
+			{{this}},
+		{{/if}}
+		</span>
+	{{/each}}
+	</div>
 </div>
 
 </script>
@@ -308,7 +331,8 @@ fill_html('#teaching-template', '#teaching');
 fill_html('#awards-template', '#awards')
 fill_html('#tech-template', '#tech');
 fill_html('#repos-template', '#repos');
-fill_html('#languages-template', '#languages')
+fill_html('#languages-template', '#languages');
+fill_html('#citizenship-template', '#citizenship')
 </script>
 </body>
 

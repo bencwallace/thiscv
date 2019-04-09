@@ -1,0 +1,125 @@
+{
+	"personal": {
+		"name": {
+			"title": "Mr.",
+			"first": "Maurits",
+			"middle": "Cornelis",
+			"last": "Escher"
+		},
+		"address": [
+			"Address line 1",
+			"Address line 2",
+			"Address line 3",
+			"Address line 4"],
+		"email": "mcescher@email.com",
+		"phone": {
+			"country": 31,
+			"area": 35,
+			"number": 5551234
+		},
+		"web": [{
+			"type": "personal",
+			"url": "mcescher.com"
+		}, {
+			"type": "wikipedia",
+			"url": "en.wikipedia.org/wiki/M._C._Escher"
+		}]
+	},
+
+	"employment": [{
+		"organization": "Escher Prints",
+		"position": "CEO",
+		"start": {
+			"year": 1922,
+			"month": 8
+		},
+		"end": null
+	}],
+
+	"education": [{
+		"degree": "PhD",
+		"subject": "art",
+		"institution": "University of Escher",
+		"start": {
+			"year": 1918,
+			"month": 9
+		},
+		"end": {
+			"year": 1922,
+			"month": 9,
+			"day": 1
+		}
+	},{
+		"degree": "BA",
+		"subject": "architecture",
+		"institution": "Escher University",
+		"start": {
+			"year": 1913,
+			"month": 9,
+			"day": 1
+		},
+		"end": {
+			"year": 1919,
+			"month": 9,
+			"day": 1
+		}
+	}],
+
+	"publications": [{
+		"title": "Penrose stairs",
+		"coauthors": [{
+			"title": "Prof.",
+			"first": "Roger",
+			"middle": "",
+			"last": "Penrose"
+		}],
+		"date": {
+			"year": 1960,
+			"month": 12
+		},
+		"journal": "Journal of Impossible Objects",
+		"volume": 100,
+		"issue": 1,
+		"pages": {
+			"start": 100,
+			"end": 106
+		}
+	}],
+
+	"talks": [{
+		"location": {
+			"name": "University of Escher",
+			"city": "Milan",
+			"country": "Italy"
+		},
+		"event": {
+			"name": "Conference of impossible objects",
+			"type": "conference"
+		},
+		"date": {
+			"year": 1940,
+			"month": 2
+		}
+	}],
+
+	"teaching": [{
+		"course": "Impossible staircases",
+		"date": {
+			"year": 1950
+		},
+		"role": "Instructor"
+	}],
+
+	"awards": [{
+		"name": "Best Tesselation",
+		"sponsor": "Tiling Foundation",
+		"date": {
+			"year": 1960
+		}
+	}],
+
+	"languages": [{
+		"name": "dutch",
+		"proficiency": "mother tongue"
+	}]
+}
