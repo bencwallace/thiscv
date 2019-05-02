@@ -1,6 +1,6 @@
 # This CV
 
-This CV is open source.
+This CV is written in Handlebars.js
 
 ## Why this CV?
 
